@@ -1,0 +1,13 @@
+DocumentRoot /var/www
+
+<Directory />
+	Options FollowSymLinks
+	AllowOverride None
+</Directory>
+
+<Directory /var/www/>
+	Options Indexes FollowSymLinks MultiViews
+	AllowOverride None
+	Order allow,deny
+	Allow from all
+</Directory>
