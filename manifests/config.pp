@@ -10,7 +10,7 @@ class apache2::config {
     file { 'apache2-core':
         name => "${apache2::params::config_dir}/conf.d/core",
         ensure => present,
-        source => 'puppet:///apache2/core',
+        content => template('apache2/core.erb'),
         owner => root,
         group => root,
         mode => 644,
