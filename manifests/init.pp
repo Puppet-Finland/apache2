@@ -11,7 +11,9 @@
 #
 # == Parameters
 #
-# None at the moment
+# [*monitor_email*]
+#   Email address where local service monitoring software sends it's reports to.
+#   Defaults to global variable $::servermonitor.
 # 
 # == Examples
 #
@@ -27,7 +29,10 @@
 # BSD-license
 # See file LICENSE for details
 #
-class apache2 {
+class apache2(
+    $monitor_email = $::servermonitor
+)
+{
 
     include webserver
     include apache2::install
@@ -35,6 +40,8 @@ class apache2 {
     include apache2::service
 
     if tagged('monit') {
-        include apache2::monit
+        class { 'apache2::monit':
+            monitor_email => $monitor_email,
+        }
     }
 }
