@@ -35,7 +35,7 @@ class apache2(
 {
 
 # Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_apache2') != 'false' {
+if hiera('manage_apache2', 'true') != 'false' {
 
     include webserver
     include apache2::install
