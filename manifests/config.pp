@@ -8,7 +8,7 @@ class apache2::config {
     include apache2::params
 
     file { 'apache2-core':
-        name => "${apache2::params::config_dir}/conf.d/core",
+        name => "${apache2::params::conf_d_dir}/core",
         ensure => present,
         content => template('apache2/core.erb'),
         owner => root,

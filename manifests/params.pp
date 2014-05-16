@@ -17,6 +17,12 @@ class apache2::params {
         'Debian': {
             $package_name = 'apache2'
             $config_dir = '/etc/apache2'
+
+            case $::lsbdistcodename {
+                'trusty': { $conf_d_dir = "${config_dir}/conf-enabled" }
+                default:  { $conf_d_dir = "${config_dir}/conf.d" }
+            }
+
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $www_group = 'www-data'
@@ -24,6 +30,12 @@ class apache2::params {
         default: {
             $package_name = 'apache2'
             $config_dir = '/etc/apache2'
+
+            case $::lsbdistcodename {
+                'trusty': { $conf_d_dir = "${config_dir}/conf-enabled" }
+                default:  { $conf_d_dir = "${config_dir}/conf.d" }
+            }
+
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $www_group = 'www-data'

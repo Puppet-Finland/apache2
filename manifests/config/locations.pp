@@ -8,8 +8,11 @@ define apache2::config::locations(
     $location_lines=['']
 )
 {
+
+    include apache2::params
+
     file { 'apache2-locations':
-        name => "${apache2::params::config_dir}/conf.d/locations",
+        name => "${apache2::params::conf_d_dir}/locations",
         ensure => present,
         content => template('apache2/locations.erb'),
         owner => root,
