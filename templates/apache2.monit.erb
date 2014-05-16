@@ -1,7 +1,6 @@
 ### THIS FILE IS MANAGED BY PUPPET. ANY MANUAL CHANGES WILL GET OVERWRITTEN.
 
-check process apache2 with pidfile /var/run/apache2.pid
-        start "/etc/init.d/apache2 start"
-        stop "/etc/init.d/apache2 stop"
-        alert <%= scope.lookupvar('apache2::monit::monitor_email') %> with reminder on 480 cycles
-
+check process apache2 with pidfile <%= scope.lookupvar('apache2::params::pidfile') %>
+   start program = "<%= scope.lookupvar('apache2::params::service_start') %>"
+   stop  program = "<%= scope.lookupvar('apache2::params::service_stop') %>"
+   alert <%= scope.lookupvar('apache2::monit::monitor_email') %> with reminder on 480 cycles

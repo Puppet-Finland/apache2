@@ -12,33 +12,57 @@ class apache2::params {
             $service_name = 'httpd'
             $mod_python_package_name = 'mod_python'
             $www_group = 'apache'
+            $pidfile = '/var/run/httpd.pid'
 
+            if $::operatingsystem == 'Fedora' {
+                $service_start = "/usr/bin/systemctl start ${service_name}.service"
+                $service_stop = "/usr/bin/systemctl stop ${service_name}.service"
+            } else {
+                $service_start = "/sbin/service $service_name start"
+                $service_stop = "/sbin/service $service_name stop"
+            }
         }
         'Debian': {
             $package_name = 'apache2'
             $config_dir = '/etc/apache2'
 
             case $::lsbdistcodename {
-                'trusty': { $conf_d_dir = "${config_dir}/conf-enabled" }
-                default:  { $conf_d_dir = "${config_dir}/conf.d" }
+                'trusty': {
+                    $conf_d_dir = "${config_dir}/conf-enabled"
+                    $pidfile = '/var/run/apache2/apache2.pid'
+                }
+                default: {
+                    $conf_d_dir = "${config_dir}/conf.d"
+                    $pidfile = '/var/run/apache2.pid'
+                }
             }
 
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $www_group = 'www-data'
+            $service_start = "/usr/sbin/service $service_name start"
+            $service_stop = "/usr/sbin/service $service_name stop"
         }
         default: {
             $package_name = 'apache2'
             $config_dir = '/etc/apache2'
 
             case $::lsbdistcodename {
-                'trusty': { $conf_d_dir = "${config_dir}/conf-enabled" }
-                default:  { $conf_d_dir = "${config_dir}/conf.d" }
+                'trusty': {
+                    $conf_d_dir = "${config_dir}/conf-enabled"
+                    $pidfile = '/var/run/apache2/apache2.pid'
+                }
+                default: {
+                    $conf_d_dir = "${config_dir}/conf.d"
+                    $pidfile = '/var/run/apache2.pid'
+                }
             }
 
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $www_group = 'www-data'
+            $service_start = "/usr/sbin/service $service_name start"
+            $service_stop = "/usr/sbin/service $service_name stop"
         }
     }
 }
