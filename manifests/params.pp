@@ -11,6 +11,7 @@ class apache2::params {
             $config_dir = '/etc/httpd'
             $service_name = 'httpd'
             $mod_python_package_name = 'mod_python'
+            $mod_wsgi_package_name = 'mod_wsgi'
             $www_group = 'apache'
             $pidfile = '/var/run/httpd.pid'
 
@@ -39,6 +40,7 @@ class apache2::params {
 
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
+            $mod_wsgi_package_name = 'libapache2-mod-wsgi'
             $www_group = 'www-data'
             $service_start = "/usr/sbin/service $service_name start"
             $service_stop = "/usr/sbin/service $service_name stop"
@@ -60,6 +62,7 @@ class apache2::params {
 
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
+            $mod_wsgi_package_name = 'libapache2-mod-wsgi'
             $www_group = 'www-data'
             $service_start = "/usr/sbin/service $service_name start"
             $service_stop = "/usr/sbin/service $service_name stop"
