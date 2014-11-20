@@ -6,9 +6,9 @@
 #
 # == Examples
 #
-# apache2::module { 'apache2-ssl-module':
-#   modulename => 'ssl'
-# }
+#   apache2::module { 'apache2-ssl-module':
+#       modulename => 'ssl'
+#   }
 #
 define apache2::module($modulename) {
     exec { "enable-apache2-module-${modulename}":

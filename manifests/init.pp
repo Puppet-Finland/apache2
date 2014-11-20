@@ -17,17 +17,17 @@
 # 
 # == Examples
 #
-# include apache2
+#   include apache2
 # 
 # == Authors
 #
 # Samuli Seppänen <samuli.seppanen@gmail.com>
+#
 # Samuli Seppänen <samuli@openvpn.net>
 #
 # == License
 #
-# BSD-license
-# See file LICENSE for details
+# BSD-license. See file LICENSE for details.
 #
 class apache2(
     $monitor_email = $::servermonitor
