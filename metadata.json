@@ -1,0 +1,13 @@
+{
+  "name": "puppetfinland-apache2",
+  "version": "0.5.0",
+  "author": "Puppet-Finland team",
+  "license": "BSD license",
+  "summary": "Setup apache2"
+  "source": "https://github.com/Puppet-Finland/apache2.git",
+  "project_page": "https://github.com/Puppet-Finland/apache2",
+  "dependencies": [
+    { "name": "puppetfinland/webserver", "version_requirement": ">= 0.5.0" },
+    { "name": "puppetfinland/monit", "version_requirement": ">= 0.5.0" },
+  ]
+}
