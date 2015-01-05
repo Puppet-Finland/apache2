@@ -14,6 +14,8 @@
 # [*monitor_email*]
 #   Email address where local service monitoring software sends it's reports to.
 #   Defaults to global variable $::servermonitor.
+# [*modules*]
+#   A hash of apache2::module resources to realize.
 # 
 # == Examples
 #
@@ -30,7 +32,8 @@
 # BSD-license. See file LICENSE for details.
 #
 class apache2(
-    $monitor_email = $::servermonitor
+    $monitor_email = $::servermonitor,
+    $modules = {}
 )
 {
 
@@ -41,6 +44,8 @@ if hiera('manage_apache2', 'true') != 'false' {
     include apache2::install
     include apache2::config
     include apache2::service
+
+    create_resources('apache2::module', $modules)
 
     if tagged('monit') {
         class { 'apache2::monit':
