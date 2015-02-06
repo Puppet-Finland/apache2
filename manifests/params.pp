@@ -13,7 +13,7 @@ class apache2::params {
             $mod_python_package_name = 'mod_python'
             $mod_wsgi_package_name = 'mod_wsgi'
             $www_group = 'apache'
-            $pidfile = '/var/run/httpd.pid'
+            $pidfile = '/var/run/httpd/httpd.pid'
 
             if $::operatingsystem == 'Fedora' {
                 $service_start = "/usr/bin/systemctl start ${service_name}.service"
