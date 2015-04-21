@@ -16,10 +16,8 @@ class apache2::params {
             $pidfile = '/var/run/httpd/httpd.pid'
 
             if $::operatingsystem == 'Fedora' {
-                $service_start = "/usr/bin/systemctl start \
-                                  ${service_name}.service"
-                $service_stop = "/usr/bin/systemctl stop \
-                                 ${service_name}.service"
+                $service_start = "/usr/bin/systemctl start ${service_name}.service"
+                $service_stop = "/usr/bin/systemctl stop ${service_name}.service"
             } else {
                 $service_start = "/sbin/service ${service_name} start"
                 $service_stop = "/sbin/service ${service_name} stop"
