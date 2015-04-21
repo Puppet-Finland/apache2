@@ -16,11 +16,13 @@ class apache2::params {
             $pidfile = '/var/run/httpd/httpd.pid'
 
             if $::operatingsystem == 'Fedora' {
-                $service_start = "/usr/bin/systemctl start ${service_name}.service"
-                $service_stop = "/usr/bin/systemctl stop ${service_name}.service"
+                $service_start = "/usr/bin/systemctl start \
+                                  ${service_name}.service"
+                $service_stop = "/usr/bin/systemctl stop \
+                                 ${service_name}.service"
             } else {
-                $service_start = "/sbin/service $service_name start"
-                $service_stop = "/sbin/service $service_name stop"
+                $service_start = "/sbin/service ${service_name} start"
+                $service_stop = "/sbin/service ${service_name} stop"
             }
         }
         'Debian': {
@@ -42,8 +44,8 @@ class apache2::params {
             $mod_python_package_name = 'libapache2-mod-python'
             $mod_wsgi_package_name = 'libapache2-mod-wsgi'
             $www_group = 'www-data'
-            $service_start = "/usr/sbin/service $service_name start"
-            $service_stop = "/usr/sbin/service $service_name stop"
+            $service_start = "/usr/sbin/service ${service_name} start"
+            $service_stop = "/usr/sbin/service ${service_name} stop"
         }
         default: {
             $package_name = 'apache2'
@@ -64,8 +66,8 @@ class apache2::params {
             $mod_python_package_name = 'libapache2-mod-python'
             $mod_wsgi_package_name = 'libapache2-mod-wsgi'
             $www_group = 'www-data'
-            $service_start = "/usr/sbin/service $service_name start"
-            $service_stop = "/usr/sbin/service $service_name stop"
+            $service_start = "/usr/sbin/service ${service_name} start"
+            $service_stop = "/usr/sbin/service ${service_name} stop"
         }
     }
 }

@@ -12,13 +12,13 @@ define apache2::config::locations(
     include apache2::params
 
     file { 'apache2-locations':
-        name => "${apache2::params::conf_d_dir}/locations",
-        ensure => present,
+        ensure  => present,
+        name    => "${::apache2::params::conf_d_dir}/locations",
         content => template('apache2/locations.erb'),
-        owner => root,
-        group => root,
-        mode => 644,
+        owner   => root,
+        group   => root,
+        mode    => '0644',
         require => Class['apache2::install'],
-        notify => Class['apache2::service'],
-    }      
+        notify  => Class['apache2::service'],
+    }
 }

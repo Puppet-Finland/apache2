@@ -8,14 +8,14 @@ class apache2::config {
     include apache2::params
 
     file { 'apache2-core':
-        name => "${apache2::params::conf_d_dir}/core",
-        ensure => present,
+        ensure  => present,
+        name    => "${::apache2::params::conf_d_dir}/core",
         content => template('apache2/core.erb'),
-        owner => root,
-        group => root,
-        mode => 644,
+        owner   => root,
+        group   => root,
+        mode    => '0644',
         require => Class['apache2::install'],
-        notify => Class['apache2::service'],
+        notify  => Class['apache2::service'],
     }
 
     # Add file containing LocationMatch rules

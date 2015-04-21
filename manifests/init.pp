@@ -11,6 +11,9 @@
 #
 # == Parameters
 #
+# [*manage*]
+#   Whether to manage Apache2 using Puppet or not. Valid values 'yes' (default) 
+#   and 'no'.
 # [*monitor_email*]
 #   Email address where local service monitoring software sends it's reports to.
 #   Defaults to global variable $::servermonitor.
@@ -31,14 +34,15 @@
 #
 # BSD-license. See file LICENSE for details.
 #
-class apache2(
+class apache2
+(
+    $manage = 'yes',
     $monitor_email = $::servermonitor,
     $modules = {}
 )
 {
 
-# Rationale for this is explained in init.pp of the sshd module
-if hiera('manage_apache2', 'true') != 'false' {
+if $manage == 'yes' {
 
     include webserver
     include apache2::install
