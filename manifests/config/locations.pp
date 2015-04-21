@@ -9,7 +9,7 @@ define apache2::config::locations(
 )
 {
 
-    include apache2::params
+    include ::apache2::params
 
     file { 'apache2-locations':
         ensure  => present,

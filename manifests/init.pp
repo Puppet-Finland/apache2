@@ -44,15 +44,15 @@ class apache2
 
 if $manage == 'yes' {
 
-    include webserver
-    include apache2::install
-    include apache2::config
-    include apache2::service
+    include ::webserver
+    include ::apache2::install
+    include ::apache2::config
+    include ::apache2::service
 
     create_resources('apache2::module', $modules)
 
     if tagged('monit') {
-        class { 'apache2::monit':
+        class { '::apache2::monit':
             monitor_email => $monitor_email,
         }
     }

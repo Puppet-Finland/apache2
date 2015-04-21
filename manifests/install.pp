@@ -5,7 +5,7 @@
 #
 class apache2::install {
 
-    include apache2::params
+    include ::apache2::params
 
     package { 'apache2-apache2':
         ensure => installed,

@@ -5,7 +5,7 @@
 #
 class apache2::config::python {
 
-    include apache2::params
+    include ::apache2::params
 
     package { 'apache2-libapache2-mod-python':
         ensure => installed,

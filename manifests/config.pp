@@ -5,7 +5,7 @@
 #
 class apache2::config {
 
-    include apache2::params
+    include ::apache2::params
 
     file { 'apache2-core':
         ensure  => present,
