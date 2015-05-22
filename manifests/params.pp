@@ -12,7 +12,13 @@ class apache2::params {
             $package_name = 'httpd'
             $config_dir = '/etc/httpd'
             $service_name = 'httpd'
-            $mod_python_package_name = 'mod_python'
+
+            $mod_python_package_name = $::operatingsystemmajrelease ? {
+                6 => 'mod_python',
+                7 => 'mod_wsgi',
+                default => 'mod_wsgi',
+            }
+
             $mod_wsgi_package_name = 'mod_wsgi'
             $www_group = 'apache'
             $pidfile = '/var/run/httpd/httpd.pid'
@@ -22,7 +28,7 @@ class apache2::params {
             $config_dir = '/etc/apache2'
 
             case $::lsbdistcodename {
-                'trusty': {
+                /(trusty|jessie)/: {
                     $conf_d_dir = "${config_dir}/conf-enabled"
                     $pidfile = '/var/run/apache2/apache2.pid'
                 }
