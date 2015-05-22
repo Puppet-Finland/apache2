@@ -12,7 +12,9 @@
 # == Parameters
 #
 # [*manage*]
-#   Whether to manage Apache2 using Puppet or not. Valid values 'yes' (default) 
+#   Manage Apache2 using Puppet Valid values are 'yes' (default) and 'no'.
+# [*manage_config*]
+#   Manage Apache2 configuration using Puppet. Valid values are 'yes' (default) 
 #   and 'no'.
 # [*monitor_email*]
 #   Email address where local service monitoring software sends it's reports to.
@@ -22,7 +24,7 @@
 # 
 # == Examples
 #
-#   include apache2
+#   include ::apache2
 # 
 # == Authors
 #
@@ -37,6 +39,7 @@
 class apache2
 (
     $manage = 'yes',
+    $manage_config = 'yes',
     $monitor_email = $::servermonitor,
     $modules = {}
 )
@@ -46,10 +49,13 @@ if $manage == 'yes' {
 
     include ::webserver
     include ::apache2::install
-    include ::apache2::config
-    include ::apache2::service
-
     create_resources('apache2::module', $modules)
+
+    if $manage_config == 'yes' {
+        include ::apache2::config
+    }
+
+    include ::apache2::service
 
     if tagged('monit') {
         class { '::apache2::monit':

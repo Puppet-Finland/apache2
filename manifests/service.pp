@@ -10,6 +10,6 @@ class apache2::service {
     service { 'apache2-apache2':
         name    => $::apache2::params::service_name,
         enable  => true,
-        require => Class['apache2::config'],
+        require => Class['apache2::install'],
     }
 }
