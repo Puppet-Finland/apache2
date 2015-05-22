@@ -21,6 +21,7 @@ class apache2::params {
             }
 
             $mod_wsgi_package_name = 'mod_wsgi'
+            $www_user = 'apache'
             $www_group = 'apache'
             $pidfile = '/var/run/httpd/httpd.pid'
         }
@@ -42,6 +43,7 @@ class apache2::params {
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $mod_wsgi_package_name = 'libapache2-mod-wsgi'
+            $www_user = 'www-data'
             $www_group = 'www-data'
         }
         default: {
