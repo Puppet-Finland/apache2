@@ -11,6 +11,7 @@ class apache2::params {
         'RedHat': {
             $package_name = 'httpd'
             $config_dir = '/etc/httpd'
+            $conf_d_dir = "${config_dir}/conf.d"
             $service_name = 'httpd'
 
             $mod_python_package_name = $::operatingsystemmajrelease ? {
