@@ -18,6 +18,8 @@ define apache2::module
     $modulename = $title
 )
 {
+    include ::apache2::params
+
     exec { "enable-apache2-module-${modulename}":
         command => "a2enmod ${modulename}",
         creates => "/etc/apache2/mods-enabled/${modulename}.load",

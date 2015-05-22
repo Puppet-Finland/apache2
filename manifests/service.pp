@@ -3,9 +3,7 @@
 #
 # Enable apache2 on boot
 #
-class apache2::service {
-
-    include ::apache2::params
+class apache2::service inherits apache2::params {
 
     service { 'apache2-apache2':
         name    => $::apache2::params::service_name,

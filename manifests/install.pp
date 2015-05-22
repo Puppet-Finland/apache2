@@ -3,9 +3,7 @@
 #
 # Installs Apache2
 #
-class apache2::install {
-
-    include ::apache2::params
+class apache2::install inherits apache2::params {
 
     package { 'apache2-apache2':
         ensure => installed,
