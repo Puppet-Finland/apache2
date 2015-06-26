@@ -16,6 +16,9 @@
 # [*manage_config*]
 #   Manage Apache2 configuration using Puppet. Valid values are 'yes' (default) 
 #   and 'no'.
+# [*ensure_service*]
+#   Status of Apache2 service. Valid values are 'running', 'stopped' and undef
+#   (default).
 # [*monitor_email*]
 #   Email address where local service monitoring software sends it's reports to.
 #   Defaults to global variable $::servermonitor.
@@ -40,6 +43,7 @@ class apache2
 (
     $manage = 'yes',
     $manage_config = 'yes',
+    $ensure_service = undef,
     $monitor_email = $::servermonitor,
     $modules = {}
 )
@@ -55,7 +59,9 @@ if $manage == 'yes' {
         include ::apache2::config
     }
 
-    include ::apache2::service
+    class { '::apache2::service':
+        ensure => $ensure_service,
+    }
 
     if tagged('monit') {
         class { '::apache2::monit':

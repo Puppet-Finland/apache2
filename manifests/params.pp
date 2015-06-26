@@ -24,6 +24,9 @@ class apache2::params {
             $www_user = 'apache'
             $www_group = 'apache'
             $pidfile = '/var/run/httpd/httpd.pid'
+
+            # SELinux settings
+            $httpd_can_connect_ldap = 'httpd_can_connect_ldap'
         }
         'Debian': {
             $package_name = 'apache2'
