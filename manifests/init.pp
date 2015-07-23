@@ -16,6 +16,8 @@
 # [*manage_config*]
 #   Manage Apache2 configuration using Puppet. Valid values are 'yes' (default) 
 #   and 'no'.
+# [*servername*]
+#   Value of ServerName directive in Apache configuration. Defaults to $::fqdn.
 # [*ensure_service*]
 #   Status of Apache2 service. Valid values are 'running', 'stopped' and undef
 #   (default).
@@ -43,6 +45,7 @@ class apache2
 (
     $manage = 'yes',
     $manage_config = 'yes',
+    $servername = $::fqdn,
     $ensure_service = undef,
     $monitor_email = $::servermonitor,
     $modules = {}
@@ -56,7 +59,9 @@ if $manage == 'yes' {
     create_resources('apache2::module', $modules)
 
     if $manage_config == 'yes' {
-        include ::apache2::config
+        class { '::apache2::config':
+            servername => $servername,
+        }
     }
 
     class { '::apache2::service':
