@@ -9,7 +9,9 @@
 #   The resource $title is used as the basename of target files as well as the 
 #   template.
 #
-define apache2::config::fragment inherits apache2::params {
+define apache2::config::fragment {
+
+    include ::apache2::params
 
     file { "apache2-conf.d-fragment-${title}":
         ensure  => present,
