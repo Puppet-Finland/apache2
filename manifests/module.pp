@@ -20,10 +20,13 @@ define apache2::module
 {
     include ::apache2::params
 
-    exec { "enable-apache2-module-${modulename}":
-        command => "a2enmod ${modulename}",
-        creates => "/etc/apache2/mods-enabled/${modulename}.load",
-        path    => [ '/bin', '/usr/bin', '/usr/sbin' ],
-        require => Class['apache2::install'],
-    }
+    if $::osfamily == 'Debian' {
+
+      exec { "enable-apache2-module-${modulename}":
+          command => "a2enmod ${modulename}",
+          creates => "/etc/apache2/mods-enabled/${modulename}.load",
+          path    => [ '/bin', '/usr/bin', '/usr/sbin' ],
+          require => Class['apache2::install'],
+      }
+  }
 }

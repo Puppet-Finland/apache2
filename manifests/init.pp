@@ -62,6 +62,8 @@ if $manage == 'yes' {
         class { '::apache2::config':
             servername => $servername,
         }
+
+        include ::apache2::config::setenvif
     }
 
     class { '::apache2::service':
