@@ -6,6 +6,7 @@ An Apache2 Puppet module
 
 * [Class: apache2](manifests/init.pp)
 * [Class: apache2::ldapauth](manifests/ldapauth.pp)
+* [Define: apache2::config::fragment](manifests/config/fragment.pp)
 
 # Dependencies
 
