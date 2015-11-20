@@ -9,6 +9,7 @@ class apache2::monit
 )
 {
   monit::fragment { 'apache2-apache2.monit':
+    basename   => 'apache2',
     modulename => 'apache2',
   }
 }
