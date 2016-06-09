@@ -33,13 +33,13 @@ class apache2::params {
             $config_dir = '/etc/apache2'
 
             case $::lsbdistcodename {
-                /(trusty|jessie)/: {
-                    $conf_d_dir = "${config_dir}/conf-enabled"
-                    $pidfile = '/var/run/apache2/apache2.pid'
-                }
-                default: {
+                /(precise|wheezy)/: {
                     $conf_d_dir = "${config_dir}/conf.d"
                     $pidfile = '/var/run/apache2.pid'
+                }
+                default: {
+                    $conf_d_dir = "${config_dir}/conf-enabled"
+                    $pidfile = '/var/run/apache2/apache2.pid'
                 }
             }
 
