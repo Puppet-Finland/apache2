@@ -5,7 +5,7 @@
 #
 class apache2::config
 (
-    $servername
+    String $servername
 
 ) inherits apache2::params {
 

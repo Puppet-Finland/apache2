@@ -19,8 +19,8 @@
 # [*servername*]
 #   Value of ServerName directive in Apache configuration. Defaults to $::fqdn.
 # [*ensure_service*]
-#   Status of Apache2 service. Valid values are 'running', 'stopped' and undef
-#   (default).
+#   Status of Apache2 service. Valid values are the same as for the ensure 
+#   parameter in service resource. The default value is undef.
 # [*monitor_email*]
 #   Email address where local service monitoring software sends it's reports to.
 #   Defaults to global variable $::servermonitor.

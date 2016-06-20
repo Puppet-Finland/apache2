@@ -15,7 +15,7 @@
 #
 define apache2::module
 (
-    $modulename = $title
+    String $modulename = $title
 )
 {
     include ::apache2::params

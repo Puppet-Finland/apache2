@@ -5,7 +5,7 @@
 #
 class apache2::service
 (
-    $ensure
+    Variant[Boolean, Enum['stopped','running'], Undef] $ensure
 
 ) inherits apache2::params {
 

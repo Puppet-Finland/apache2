@@ -5,7 +5,7 @@
 #
 class apache2::monit
 (
-    $monitor_email
+    String $monitor_email
 )
 {
   monit::fragment { 'apache2-apache2.monit':
