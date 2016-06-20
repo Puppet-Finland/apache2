@@ -43,6 +43,11 @@ class apache2::params {
                 }
             }
 
+            $mod_php_package_name = $::lsbdistcodename ? {
+                'xenial' => 'libapache2-mod-php',
+                default  => 'libapache2-mod-php5',
+            }
+
             $service_name = 'apache2'
             $mod_python_package_name = 'libapache2-mod-python'
             $mod_wsgi_package_name = 'libapache2-mod-wsgi'
