@@ -31,6 +31,7 @@ class apache2::params {
         'Debian': {
             $package_name = 'apache2'
             $config_dir = '/etc/apache2'
+            $sites_dir = "${config_dir}/sites-enabled"
 
             case $::lsbdistcodename {
                 /(precise|wheezy)/: {
@@ -53,6 +54,9 @@ class apache2::params {
             $mod_wsgi_package_name = 'libapache2-mod-wsgi'
             $www_user = 'www-data'
             $www_group = 'www-data'
+
+            $default_sites = ["${sites_dir}/000-default.conf", "${sites_dir}/default-ssl.conf"]
+
         }
         default: {
             fail("Unsupported operating system ${::osfamility}")

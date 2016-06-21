@@ -16,6 +16,10 @@
 # [*manage_config*]
 #   Manage Apache2 configuration using Puppet. Valid values are true (default) 
 #   and false.
+# [*purge_default_sites*]
+#   Remove default sites provided by distro packages. Valid values are true and 
+#   false (default). Requires that $manage_config to be set to true to have any 
+#   effect.
 # [*servername*]
 #   Value of ServerName directive in Apache configuration. Defaults to $::fqdn.
 # [*ensure_service*]
@@ -45,6 +49,7 @@ class apache2
 (
     Boolean $manage = true,
     Boolean $manage_config = true,
+            $purge_default_sites = false,
             $servername = $::fqdn,
             $ensure_service = undef,
             $monitor_email = $::servermonitor,
@@ -60,7 +65,8 @@ if $manage {
 
     if $manage_config {
         class { '::apache2::config':
-            servername => $servername,
+            purge_default_sites => $purge_default_sites,
+            servername          => $servername,
         }
 
         include ::apache2::config::setenvif

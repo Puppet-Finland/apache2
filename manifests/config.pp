@@ -5,9 +5,17 @@
 #
 class apache2::config
 (
-    String $servername
+    Boolean $purge_default_sites,
+    String  $servername
 
 ) inherits apache2::params {
+
+
+    if $purge_default_sites {
+        file { $::apache2::params::default_sites:
+            ensure => 'absent',
+        }
+    }
 
     file { 'apache2-servername':
         ensure  => present,
