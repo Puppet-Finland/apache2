@@ -16,6 +16,8 @@
 # [*manage_config*]
 #   Manage Apache2 configuration using Puppet. Valid values are true (default) 
 #   and false.
+# [*manage_monit*]
+#   Manage monit rules. Valid values are true (default) and false.
 # [*purge_default_sites*]
 #   Remove default sites provided by distro packages. Valid values are true and 
 #   false (default). Requires that $manage_config to be set to true to have any 
@@ -49,6 +51,7 @@ class apache2
 (
     Boolean $manage = true,
     Boolean $manage_config = true,
+    Boolean $manage_monit = true,
             $purge_default_sites = false,
             $servername = $::fqdn,
             $ensure_service = undef,
@@ -76,7 +79,7 @@ if $manage {
         ensure => $ensure_service,
     }
 
-    if tagged('monit') {
+    if $manage_monit {
         class { '::apache2::monit':
             monitor_email => $monitor_email,
         }
