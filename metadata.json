@@ -2,7 +2,7 @@
   "name": "puppetfinland-apache2",
   "version": "2.1.0",
   "author": "Puppet-Finland team",
-  "summary": "Setup apache2",
+  "summary": "Setup Apache 2 and optionally configure firewall and monit",
   "license": "BSD-2-Clause",
   "source": "https://github.com/Puppet-Finland/puppet-apache2.git",
   "project_page": "https://github.com/Puppet-Finland/puppet-apache2",

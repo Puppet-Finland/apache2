@@ -1,26 +1,23 @@
 # apache2
 
-An Apache2 Puppet module
+A simple Apache2 Puppet module with optional monit and packet filtering support. 
+Aimed at cases where puppetlabs-apache is simply too much.
 
 # Module usage
 
-* [Class: apache2](manifests/init.pp)
-* [Class: apache2::ldapauth](manifests/ldapauth.pp)
-* [Define: apache2::config::fragment](manifests/config/fragment.pp)
+Simple usage which purges default sites:
 
-# Dependencies
+    class { '::apache2':
+      purge_default_sites => true,
+    }
 
-See [metadata.json](metadata.json).
+Customize servername:
 
-# Operating system support
+    class { '::apache2':
+      servername => 'www.example.org',
+    }
 
-This module has been tested on
+Enable an Apache module:
 
-* Ubuntu 12.04, 14.04
-* Debian 7 and 8
-* CentOS 6 and 7
+    apache2::module { 'ssl': }
 
-All UNIXy operating systems should work out of the box or with small 
-modifications.
-
-For details see [params.pp](manifests/params.pp).
