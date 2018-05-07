@@ -2,7 +2,7 @@
   "name": "puppetfinland-apache2",
   "version": "2.1.0",
   "author": "Puppet-Finland team",
-  "license": "BSD license",
+  "license": "BSD-2-Clause",
   "summary": "Setup apache2",
   "source": "https://github.com/Puppet-Finland/apache2.git",
   "project_page": "https://github.com/Puppet-Finland/apache2",
