@@ -18,6 +18,9 @@
 #   and false.
 # [*manage_monit*]
 #   Manage monit rules. Valid values are true (default) and false.
+# [*manage_packetfilter*]
+#   Manage iptables and ip6tables rules with Puppet. Valid values are true 
+#   (default) and false.
 # [*purge_default_sites*]
 #   Remove default sites provided by distro packages. Valid values are true and 
 #   false (default). Requires that $manage_config to be set to true to have any 
@@ -32,7 +35,14 @@
 #   Defaults to global variable $::servermonitor.
 # [*modules*]
 #   A hash of apache2::module resources to realize.
-# 
+# [*allow_address_ipv4*]
+#   IPv4 addresses/networks from which to allow connections. This parameter can 
+#   be either a string or an array. Defaults to 'anyv4' which means that access 
+#   is allowed from any IPv4 address.
+# [*allow_address_ipv6*]
+#   As above but for IPv6 addresses. Defaults to 'anyv6', thus allowing access
+#   from any IPv6 address.
+#
 # == Examples
 #
 #   include ::apache2
@@ -52,17 +62,19 @@ class apache2
     Boolean $manage = true,
     Boolean $manage_config = true,
     Boolean $manage_monit = true,
+    Boolean $manage_packetfilter = true,
             $purge_default_sites = false,
             $servername = $::fqdn,
             $ensure_service = undef,
             $monitor_email = $::servermonitor,
-    Hash    $modules = {}
+    Hash    $modules = {},
+            $allow_address_ipv4 = 'anyv4',
+            $allow_address_ipv6 = 'anyv6'
 )
 {
 
 if $manage {
 
-    include ::webserver
     include ::apache2::install
     create_resources('apache2::module', $modules)
 
@@ -82,6 +94,13 @@ if $manage {
     if $manage_monit {
         class { '::apache2::monit':
             monitor_email => $monitor_email,
+        }
+    }
+
+    if $manage_packetfilter {
+        class { '::webserver':
+            allow_address_ipv4 => $allow_address_ipv4,
+            allow_address_ipv6 => $allow_address_ipv6,
         }
     }
 }
