@@ -46,6 +46,7 @@ class apache2::params {
 
             $mod_php_package_name = $::lsbdistcodename ? {
                 'xenial' => 'libapache2-mod-php',
+                'bionic' => 'libapache2-mod-php7.2',
                 default  => 'libapache2-mod-php5',
             }
 
